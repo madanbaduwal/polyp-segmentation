@@ -1,13 +1,13 @@
 """
     Polyp segmentation
-    Madan Baduwal
+    @Madan Baduwal
 """
 
 import streamlit as st
 import numpy as np
 from PIL import Image
 from ultralytics import YOLO
-
+import cv2
 # from predict import predict
 # from unet import model
 
@@ -19,14 +19,14 @@ def predict(img):
     model_path = "./models/best.pt"
     model = YOLO(model_path)
     results = model(img)
-    print(f"Image tpye{results}")
     return results
 
 
 # model option
-st.markdown("<h1 style='text-align: center;'>DataScience: Polyp Segmentation</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Polyp Segmentation</h1>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center;'>Madan Baduwal<sup>1</sup>, Kishor Karki<sup>2</sup>, Usha Shrestha<sup>3</sup>, Halimat Popoola<sup>4</sup>, Priyanka Kumar<sup>1</sup></h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center;'>Department of Computer Science, University of Texas Permian Basin</h5>", unsafe_allow_html=True)
-# st.markdown("<h5 style='text-align: center;'>baduwal_m63609@utpb.edu</h5>", unsafe_allow_html=True)
+st.markdown("<h9 style='text-align: center;'>(baduwal_m63609, karki_k65395, shrestha_u53095, popoola_h51572, kumar_p)@utpb.edu</h9>", unsafe_allow_html=True)
 
 
 
@@ -39,24 +39,21 @@ with col1:
     image_cache = st.container()
     if uploaded_file is not None:
         # convert image into np array
-        img = Image.open(uploaded_file).convert('RGB')
-        img_array = np.array(img)
-
-        # # check if the file is valid (3 * 256 * 256)
-        # if img_array.shape != (256, 256, 3):
-        #     st.write("Image size should be 256*256")
-        # else:
-        # display image
+        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+        img_array = cv2.imdecode(file_bytes, 1)  # 1 means loading the image in color (BGR)
+        img_array = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
+        
         image_cache.subheader("Your uploaded file:")
+        print(img_array)
         image_cache.image(img_array)
 
         # store in streamlit session
         st.session_state.img_array = img_array
-        img_array = img_array / 255
     elif 'img_array' in st.session_state:
         img_array = st.session_state.img_array
         # display image
         image_cache.subheader("Your uploaded file:")
+        print(img_array)
         image_cache.image(img_array)
     img_pred_button = st.button('Predict')
 
@@ -65,23 +62,26 @@ with col2:
         if "img_array" not in st.session_state:
             st.write("You haven't upload any file!")
         else:
-            # get predicted mask image
             st.subheader("Model Prediction:")
-            pred_img = st.session_state.img_array / 255
+            pred_img = st.session_state.img_array 
             results = predict(pred_img)
-            # pred_mask = pred_mask[0].permute(1, 2, 0)
             
             
-            clear = st.button("clear prediction")
             for result in results:
                 for j, mask in enumerate(result.masks.data):
 
-                    mask = mask.numpy() * 255
+                    mask = mask.cpu().numpy()
                     st.session_state.pred_mask = mask
-                    st.image(mask.numpy())
+                    st.image(mask)
+            clear = st.button("clear prediction")
 
-                # mask = cv2.resize(mask, (W, H))
-            # clear prediction and content
             if clear:
                 del st.session_state.pred_maskl
                 img_pred_button = False
+
+# Citation
+st.markdown("""
+
+<p>Baduwal, Madan, et al.<i>Polyp Segmentation.</i>. 
+""", unsafe_allow_html=True)
+
