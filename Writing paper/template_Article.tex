@@ -1,0 +1,44 @@
+\documentclass[a4paper,12pt]{article}
+
+% Package imports
+\usepackage[utf8]{inputenc} % For special characters
+\usepackage{amsmath} % For mathematical symbols
+\usepackage{graphicx} % For inserting images
+\usepackage{geometry} % To adjust page margins
+
+% Define the title, author, and date
+\title{My First LaTeX Project}
+\author{Your Name}
+\date{\today} % \today will display the current date
+
+\begin{document}
+	
+	% Create title
+	\maketitle
+	
+	\tableofcontents % Optional: Auto-generated table of contents
+	
+	% Sections
+	\section{Introduction}
+	Welcome to my first LaTeX document!
+	
+	\section{Mathematics}
+    This is some changes	
+	\[
+	E = mc^2
+	\]
+	
+	\section{Images}
+	You can include an image like this:
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\textwidth]{example-image.png} % Ensure example-image.png is in the same folder
+		\caption{An example image.}
+		\label{fig:example}
+	\end{figure}
+	
+	\section{Conclusion}
+	This is a minimal LaTeX document example.
+	
+\end{document}
