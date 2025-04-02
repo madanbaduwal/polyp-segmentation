@@ -35,7 +35,7 @@ streamlit run app.py
 
 ```
 @article{baduwal2024,
-  author    = {Madan Baduwal, Kishor Karki, Usha Shrestha, Halimat Popoola,},
+  author    = {Madan Baduwal},
   title     = {Transformer-based Interpretable Polyp Segmentation},
   journal   = {},
   year      = {},
