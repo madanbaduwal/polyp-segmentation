@@ -28,7 +28,7 @@ pip install <package>
 streamlit run app.py
 ```
 
-![](./app/assets/Seg_1.png)
+![](./demo.png)
 
 
 ## BibTeX
