@@ -41,3 +41,6 @@ streamlit run app.py
   year      = {},
 }
 ```
+
+# References
+- [Awesome-Polyp-Segmentation](https://github.com/taozh2017/Awesome-Polyp-Segmentation)
