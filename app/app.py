@@ -23,11 +23,16 @@ def predict(img):
 
 
 # model option
-st.markdown("<h1 style='text-align: center;'>Polyp Segmentation</h1>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center;'>Madan Baduwal<sup>1</sup>, Kishor Karki<sup>2</sup>, Usha Shrestha<sup>3</sup>, Halimat Popoola<sup>4</sup>, Priyanka Kumar<sup>1</sup></h5>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center;'>Department of Computer Science, University of Texas Permian Basin</h5>", unsafe_allow_html=True)
-st.markdown("<h9 style='text-align: center;'>(baduwal_m63609, karki_k65395, shrestha_u53095, popoola_h51572, kumar_p)@utpb.edu</h9>", unsafe_allow_html=True)
+# st.markdown("<h1 style='text-align: center;'>Polyp Segmentation</h1>", unsafe_allow_html=True)
+# st.markdown("<h5 style='text-align: center;'>Madan Baduwal<sup>1</sup>, Kishor Karki<sup>2</sup>, Usha Shrestha<sup>3</sup>, Halimat Popoola<sup>4</sup>, Priyanka Kumar<sup>1</sup></h5>", unsafe_allow_html=True)
+# st.markdown("<h5 style='text-align: center;'>Department of Computer Science, University of Texas Permian Basin</h5>", unsafe_allow_html=True)
+# st.markdown("<h9 style='text-align: center;'>(baduwal_m63609, karki_k65395, shrestha_u53095, popoola_h51572, kumar_p)@utpb.edu</h9>", unsafe_allow_html=True)
 
+
+st.markdown("<h1 style='text-align: center;'>Polyp Segmentation</h1>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center;'>Madan Baduwal</h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center;'>Department of Computer Science, Mississippi State University</h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center;'>mb4239@msstate.edu</h5>", unsafe_allow_html=True)
 
 
 # file uploader
@@ -65,7 +70,8 @@ with col2:
             st.subheader("Model Prediction:")
             pred_img = st.session_state.img_array 
             results = predict(pred_img)
-            results = results[0][1]
+            results = results[0]
+            # results = results[0][1]
             
             
             for result in results:
